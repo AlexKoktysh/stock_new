@@ -1,7 +1,7 @@
 {
   "name": "stock_new",
   "version": "0.1.0",
-  "homepage": "https://AlexKoktysh.github.io/stock",
+  "homepage": "https://AlexKoktysh.github.io/stock_new",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
