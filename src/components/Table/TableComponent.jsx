@@ -3,19 +3,20 @@ import { useNavigate } from "react-router-dom";
 import MaterialReactTable from "material-react-table";
 import { MRT_Localization_RU } from "material-react-table/locales/ru";
 import PaginationComponent from "../Pagination/PaginationComponent";
-import { GETdata } from "../../api";
 
 function TableComponent(props) {
-    const { rows, columns, totalRecords, fetch } = props;
-    const [pagination, setPagination] = useState({
-        pageIndex: 0,
-        page: 1,
-        pageSize: 10,
-        pageCount: Math.ceil(totalRecords / 10) || 0,
-        skip: 0,
-    });
-    const [sorting, setSorting] = useState([]);
-    const [columnFilters, setColumnFilters] = useState([]);
+    const {
+        rows,
+        columns,
+        totalRecords,
+        pagination,
+        setPagination,
+        sorting,
+        setSorting,
+        columnFilters,
+        setColumnFilters,
+        loading,
+    } = props;
     const [globalFilter, setGlobalFilter] = useState("");
 
     const navigate = useNavigate();
@@ -29,35 +30,12 @@ function TableComponent(props) {
         parent.style.width = "100%";
         parent.style.border = "1px solid #e0e0e0";
     }, [rows]);
-    useEffect(() => {
-        setPagination((prev) => {
-            return { ...prev, pageCount: Math.ceil(totalRecords / pagination.pageSize) };
-        });
-    }, [pagination.pageSize, totalRecords]);
-    useEffect(() => {
-        setPagination((prev) => {
-            return { ...prev, skip: pagination.page * pagination.pageSize - pagination.pageSize };
-        });
-    }, [pagination.page, pagination.pageSize]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            const data = await GETdata({ filters: columnFilters, sorting, take: pagination.pageSize, globalFilter, skip: pagination.skip });
-        };
-        fetchData();
-    }, [
-        pagination,
-        sorting,
-        columnFilters,
-        globalFilter,
-    ]);
-
 
     return (
         <div style={{ height: 600, width: '100%', overflowY: 'auto' }}>
             <MaterialReactTable
                 columns={columns}
-                data={rows}
+                data={rows ?? []}
                 enableRowSelection={false}
                 initialState={{ density: 'compact' }}
                 state={{
@@ -65,6 +43,7 @@ function TableComponent(props) {
                     sorting,
                     columnFilters,
                     globalFilter,
+                    isLoading: loading,
                 }}
                 onPaginationChange={setPagination}
                 onSortingChange={setSorting}

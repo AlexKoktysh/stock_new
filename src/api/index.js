@@ -14,8 +14,8 @@ instance.interceptors.response.use(
     (error) => alert(error),
 );
 
-export const getAllProduct = async () => {
-    const response = await instance.get("/all_product_positions");
+export const getAllProduct = async (params) => {
+    const response = await instance.post("/all_product_positions", params);
     return response;
 };
 
