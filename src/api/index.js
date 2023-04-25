@@ -18,7 +18,3 @@ export const getAllProduct = async (params) => {
     const response = await instance.post("/all_product_positions", params);
     return response;
 };
-
-export const GETdata = (params) => {
-    // console.log(params);
-};

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import MaterialReactTable from "material-react-table";
 import { MRT_Localization_RU } from "material-react-table/locales/ru";
 import PaginationComponent from "../Pagination/PaginationComponent";
@@ -19,11 +18,6 @@ function TableComponent(props) {
     } = props;
     const [globalFilter, setGlobalFilter] = useState("");
 
-    const navigate = useNavigate();
-    const setNavigate = (id) => {
-        return navigate(`commodity/${id}`);
-    };
-
     useEffect(() => {
         const item = document.getElementsByClassName("pagination");
         const parent = item[0].parentNode;
@@ -35,7 +29,7 @@ function TableComponent(props) {
         <div style={{ height: 600, width: '100%', overflowY: 'auto' }}>
             <MaterialReactTable
                 columns={columns}
-                data={rows ?? []}
+                data={rows}
                 enableRowSelection={false}
                 initialState={{ density: 'compact' }}
                 state={{
@@ -43,7 +37,7 @@ function TableComponent(props) {
                     sorting,
                     columnFilters,
                     globalFilter,
-                    isLoading: loading,
+                    showSkeletons: loading,
                 }}
                 onPaginationChange={setPagination}
                 onSortingChange={setSorting}
