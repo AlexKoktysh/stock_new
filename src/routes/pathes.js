@@ -1,4 +1,4 @@
 export const pathes = {
-  HOME: "/",
-  COMMODITY: "commodity/:id"
+  HOME: "/stock_new/",
+  COMMODITY: "/stock_new/commodity/:id"
 };
