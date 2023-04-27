@@ -13,6 +13,8 @@ export const Routes = (props) => {
     setSorting,
     columnFilters,
     setColumnFilters,
+    globalFilter,
+    setGlobalFilter,
   } = props;
   return (
     <Switch>
@@ -28,6 +30,8 @@ export const Routes = (props) => {
             setSorting={setSorting}
             columnFilters={columnFilters}
             setColumnFilters={setColumnFilters}
+            globalFilter={globalFilter}
+            setGlobalFilter={setGlobalFilter}
           />
         }
       />

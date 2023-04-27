@@ -14,9 +14,11 @@ function TableComponent(props) {
         setSorting,
         columnFilters,
         setColumnFilters,
+        globalFilter,
+        setGlobalFilter,
         loading,
     } = props;
-    const [globalFilter, setGlobalFilter] = useState("");
+    // const [globalFilter, setGlobalFilter] = useState("");
 
     useEffect(() => {
         const item = document.getElementsByClassName("pagination");

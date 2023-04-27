@@ -13,6 +13,7 @@ function App() {
   });
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
+  const [globalFilter, setGlobalFilter] = useState("");
 
   return (
     <BrowserRouter>
@@ -25,6 +26,8 @@ function App() {
         setSorting={setSorting}
         columnFilters={columnFilters}
         setColumnFilters={setColumnFilters}
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
       ></Routes>
     </BrowserRouter>
   );

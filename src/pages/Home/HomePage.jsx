@@ -102,6 +102,8 @@ function HomePage(props) {
     setSorting,
     columnFilters,
     setColumnFilters,
+    globalFilter,
+    setGlobalFilter,
   } = props;
   const [loading, setLoading] = useState(false);
   const [rows, setRows] = useState([]);
@@ -140,13 +142,14 @@ function HomePage(props) {
       });
   }, [pagination.page, pagination.pageSize]);
   useEffect(() => {
-    fetchProduct({ filters: columnFilters, sorting, take: pagination.pageSize, skip: pagination.skip });
+    fetchProduct({ filters: columnFilters, sorting, take: pagination.pageSize, skip: pagination.skip, searchText: globalFilter });
   }, 
   [
     pagination.skip,
     pagination.pageSize,
     sorting,
     columnFilters,
+    globalFilter,
   ]);
 
   return (
@@ -163,6 +166,8 @@ function HomePage(props) {
           columnFilters={columnFilters}
           setColumnFilters={setColumnFilters}
           loading={loading}
+          globalFilter={globalFilter}
+          setGlobalFilter={setGlobalFilter}
         />
       </div>
     </div>
