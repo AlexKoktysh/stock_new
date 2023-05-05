@@ -26,6 +26,7 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
+    size: 300,
   },
   {
     accessorKey: "doc_number",
@@ -36,6 +37,7 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
+    size: 300,
   },
   {
     accessorKey: "doc_type",
@@ -66,7 +68,7 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
-    size: 120,
+    size: 150,
   },
   {
     accessorKey: "product_price",
@@ -77,7 +79,12 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
-    size: 170,
+    size: 200,
+  },
+  {
+    accessorKey: "contragent_name",
+    enableGlobalFilter: false,
+    header: "Наим. контрагента",
   },
   {
     accessorKey: "doc_link",

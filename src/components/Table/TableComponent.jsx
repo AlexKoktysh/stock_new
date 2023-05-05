@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MaterialReactTable from "material-react-table";
 import { MRT_Localization_RU } from "material-react-table/locales/ru";
 import PaginationComponent from "../Pagination/PaginationComponent";
@@ -18,7 +18,6 @@ function TableComponent(props) {
         setGlobalFilter,
         loading,
     } = props;
-    // const [globalFilter, setGlobalFilter] = useState("");
 
     useEffect(() => {
         const item = document.getElementsByClassName("pagination");
