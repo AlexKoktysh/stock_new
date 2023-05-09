@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { getAllProduct } from "../../api";
+import { addToReserve, getAllProduct } from "../../api";
 import TableComponent from "../../components/Table/TableComponent";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
+import UserDialogComponent from "../../components/Dialog/UserDialogComponent";
 
 const start_columns = [
   {
@@ -26,7 +27,7 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
-    size: 300,
+    size: 100,
   },
   {
     accessorKey: "doc_number",
@@ -37,17 +38,7 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
-    size: 300,
-  },
-  {
-    accessorKey: "doc_type",
-    header: "Тип приходного документа",
-    "muiTableHeadCellProps": {
-      "align": 'center',
-    },
-    "muiTableBodyCellProps": {
-        "align": 'center',
-    },
+    size: 100,
   },
   {
     accessorKey: "product_name",
@@ -58,6 +49,7 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
+    size: 100,
   },
   {
     accessorKey: "product_qty",
@@ -68,7 +60,7 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
-    size: 150,
+    size: 60,
   },
   {
     accessorKey: "product_price",
@@ -79,23 +71,50 @@ const start_columns = [
     "muiTableBodyCellProps": {
         "align": 'center',
     },
-    size: 200,
+    size: 60,
+    maxSize: 60,
   },
   {
     accessorKey: "contragent_name",
     enableGlobalFilter: false,
     header: "Наим. контрагента",
-  },
-  {
-    accessorKey: "doc_link",
-    header: "Просмотреть",
     "muiTableHeadCellProps": {
       "align": 'center',
     },
     "muiTableBodyCellProps": {
         "align": 'center',
     },
-    size: 150,
+    size: 100,
+  },
+  {
+    accessorKey: "doc_link",
+    header: "Просмотреть",
+    enableGlobalFilter: false,
+    enableColumnActions: false,
+    enableColumnFilter: false,
+    enableSorting: false,
+    "muiTableHeadCellProps": {
+      "align": 'center',
+    },
+    "muiTableBodyCellProps": {
+        "align": 'center',
+    },
+    size: 100,
+  },
+  {
+    accessorKey: "action",
+    header: "Добавить в резерв",
+    enableGlobalFilter: false,
+    enableColumnActions: false,
+    enableColumnFilter: false,
+    enableSorting: false,
+    "muiTableHeadCellProps": {
+      "align": 'center',
+    },
+    "muiTableBodyCellProps": {
+        "align": 'center',
+    },
+    size: 100,
   },
 ];
 
@@ -129,7 +148,15 @@ function HomePage(props) {
     const custom_rows = rows?.map((row) => {
       return {
         ...row,
-        doc_link: <Button variant="contained" sx={{ height: "20px" }} onClick={() => setNavigate(row?.id)}>Просмотреть</Button>
+        doc_link: <Button variant="contained" sx={{ width: "120px", height: "20px" }} onClick={() => setNavigate(row?.id)}>Просмотреть</Button>,
+        action:
+          <UserDialogComponent
+            openDialogText="Добавить в резерв"
+            openedDialogTitle="Добавить в резерв"
+            openedDialogMessage="Вы действительно хотите добавить данный товар в резерв?"
+            agreeActionText="Да"
+            agreeActionFunc={() => addToReserve(row?.add_to_reserve?.product_id)}
+          />
       };
     });
     setRows(custom_rows);

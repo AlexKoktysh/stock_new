@@ -18,3 +18,8 @@ export const getAllProduct = async (params) => {
     const response = await instance.post("/all_product_positions", params);
     return response;
 };
+
+export const addToReserve = async (id) => {
+    const response = await instance.post(`/add_to_reserve/${id}`);
+    return response;
+};

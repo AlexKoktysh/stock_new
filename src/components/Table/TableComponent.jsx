@@ -27,7 +27,7 @@ function TableComponent(props) {
     }, [rows]);
 
     return (
-        <div style={{ height: 600, width: '100%', overflowY: 'auto' }}>
+        <div style={{ height: 1000, width: '100%', overflowY: 'auto' }}>
             <MaterialReactTable
                 columns={columns}
                 data={rows}
